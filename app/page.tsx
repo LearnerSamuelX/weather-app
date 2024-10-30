@@ -3,13 +3,20 @@
 import WeatherInfo from '@/components/WeatherInfo';
 import Head from 'next/head';
 import Image from "next/image";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Home() {
-  const [weatherInfo, setWeatherInfo] = useState({
-    cityName: "Toronto",
-    temperature: 22,
-    weather: "Sunny"
+
+  const [loaded, setLoaded] = useState<boolean>(false)
+  const [error, setError] = useState<boolean>(false)
+  const [weatherInfo, setWeatherInfo] = useState<WeatherData>({
+    cityName: "N/A",
+    temperature: -100,
+    weather: "N/A"
+  })
+
+  useEffect(() => {
+
   })
 
   function weatherUpdate(event: React.MouseEvent<HTMLDivElement>) {
@@ -46,12 +53,24 @@ export default function Home() {
         </div>
 
         {/* Weather Information of the city */}
-        <WeatherInfo
-          cityName={weatherInfo.cityName}
-          temperature={weatherInfo.temperature}
-          weather={weatherInfo.weather}
-        />
-      </main>
-    </div>
+        <div>
+          {
+            error ?
+              <div className='text-center text-xl mt-5 text-red-500'>
+                <p>Error: Invalid city name! </p>
+              </div> : <></>
+          }
+          {
+            loaded ? <div>
+              <WeatherInfo
+                cityName={weatherInfo.cityName}
+                temperature={weatherInfo.temperature}
+                weather={weatherInfo.weather}
+              />
+            </div> : <></>
+          }
+        </div>
+      </main >
+    </div >
   );
 }
