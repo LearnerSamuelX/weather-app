@@ -4,11 +4,14 @@ import WeatherInfo from '@/components/WeatherInfo';
 import Head from 'next/head';
 import Image from "next/image";
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Home() {
 
-  const [loaded, setLoaded] = useState<boolean>(false)
+  const [rawCityName, setCityName] = useState<string>("")
+  const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<boolean>(false)
+  const [loaded, setLoaded] = useState<boolean>(false)
   const [weatherInfo, setWeatherInfo] = useState<WeatherData>({
     cityName: "N/A",
     temperature: -100,
@@ -16,12 +19,56 @@ export default function Home() {
   })
 
   useEffect(() => {
+  }, [])
 
-  })
 
   function weatherUpdate(event: React.MouseEvent<HTMLDivElement>) {
     event.preventDefault()
-    console.log("INFO: weatherUpdate function triggered.")
+    const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API
+    const cityName = nameProcessor(rawCityName)
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}`
+    axios.get(url).then((response) => {
+
+      setError((prev) => {
+        return prev = false
+      })
+
+      const weatherData = response.data
+      const currentCityName = weatherData.name
+      const currentTemp = Math.round(weatherData.main.temp - 273.15)
+      const weatherIconCode = "https://openweathermap.org/img/wn/" + weatherData.weather[0].icon + "@2x.png"
+
+      setWeatherInfo((prev) => {
+        prev.cityName = currentCityName
+        prev.temperature = currentTemp
+        prev.weather = weatherIconCode
+        setLoaded((prev) => {
+          return prev = true
+        })
+        return prev
+      })
+
+
+    }).catch((err) => {
+      console.log(err)
+      setError((prev) => {
+        return prev = true
+      })
+    })
+
+  }
+
+  function nameProcessor(cityName = "los angeles") {
+    const result: string[] = []
+    for (let i = 0; i < cityName.length; i++) {
+      const curr = cityName[i]
+      if (curr === " ") {
+        result.push("%20")
+      } else {
+        result.push(curr)
+      }
+    }
+    return result.join("")
   }
 
   return (
@@ -44,7 +91,7 @@ export default function Home() {
           <div className="ml-2" onClick={weatherUpdate}>
             <Image
               className="cursor-pointer"
-              src="/search.png" // add another search icon in white
+              src="/search.png"
               alt="search icon logomark"
               width={40}
               height={40}
@@ -65,7 +112,7 @@ export default function Home() {
               <WeatherInfo
                 cityName={weatherInfo.cityName}
                 temperature={weatherInfo.temperature}
-                weather={weatherInfo.weather}
+                weather={weatherInfo.weather} // pass icon code in it
               />
             </div> : <></>
           }
