@@ -1,9 +1,16 @@
 'use client';
 
+import WeatherInfo from '@/components/WeatherInfo';
 import Head from 'next/head';
 import Image from "next/image";
+import { useState } from 'react';
 
 export default function Home() {
+  const [weatherInfo, setWeatherInfo] = useState({
+    cityName: "Toronto",
+    temperature: 22,
+    weather: "Sunny"
+  })
 
   function weatherUpdate(event: React.MouseEvent<HTMLDivElement>) {
     event.preventDefault()
@@ -20,13 +27,13 @@ export default function Home() {
         </div>
 
         {/* Application Name */}
-        <div className="text-center m-5 text-2xl font-bold">
+        <div className="text-center mb-5 mt-40 text-2xl font-bold">
           <h1>The Weather App</h1>
         </div>
 
         {/* Input Box */}
         <div className="w-80 ml-auto mr-auto flex items-center">
-          <input placeholder="Name of the city" className="w-80 border-8 border-gray-600 text-center rounded-lg text-xl"></input>
+          <input placeholder="Name of the city" className="w-80 border-8 border-black text-center rounded-lg text-xl p-2"></input>
           <div className="ml-2" onClick={weatherUpdate}>
             <Image
               className="cursor-pointer"
@@ -37,6 +44,13 @@ export default function Home() {
             />
           </div>
         </div>
+
+        {/* Weather Information of the city */}
+        <WeatherInfo
+          cityName={weatherInfo.cityName}
+          temperature={weatherInfo.temperature}
+          weather={weatherInfo.weather}
+        />
       </main>
     </div>
   );
