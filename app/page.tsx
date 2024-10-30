@@ -3,7 +3,7 @@
 import WeatherInfo from '@/components/WeatherInfo';
 import Head from 'next/head';
 import Image from "next/image";
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
 
 export default function Home() {
@@ -58,6 +58,14 @@ export default function Home() {
 
   }
 
+  function textValue(event: ChangeEvent<HTMLInputElement>) {
+    console.log(event.target.value)
+    setCityName((prev) => {
+      prev = event.target.value
+      return prev
+    })
+  }
+
   function nameProcessor(cityName = "los angeles") {
     const result: string[] = []
     for (let i = 0; i < cityName.length; i++) {
@@ -87,7 +95,11 @@ export default function Home() {
 
         {/* Input Box */}
         <div className="w-80 ml-auto mr-auto flex items-center">
-          <input placeholder="Name of the city" className="w-80 border-8 border-black text-center rounded-lg text-xl p-2"></input>
+          <input
+            placeholder="Name of the city"
+            className="w-80 border-8 border-black text-center rounded-lg text-xl p-2"
+            onChange={textValue}
+          ></input>
           <div className="ml-2" onClick={weatherUpdate}>
             <Image
               className="cursor-pointer"
