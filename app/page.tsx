@@ -9,7 +9,7 @@ import axios from 'axios';
 export default function Home() {
 
   const [rawCityName, setCityName] = useState<string>("")
-  const [loading, setLoading] = useState<boolean>(false)
+  const [renew, setRenew] = useState<string>("")
   const [error, setError] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
   const [weatherInfo, setWeatherInfo] = useState<WeatherData>({
@@ -19,7 +19,7 @@ export default function Home() {
   })
 
   useEffect(() => {
-  }, [])
+  }, [renew])
 
 
   function weatherUpdate(event: React.MouseEvent<HTMLDivElement>) {
@@ -42,31 +42,42 @@ export default function Home() {
         prev.cityName = currentCityName
         prev.temperature = currentTemp
         prev.weather = weatherIconCode
+        setRenew((prev) => {
+          return prev = cityName
+        })
+
         setLoaded((prev) => {
           return prev = true
         })
+
+        setError((prev) => {
+          return prev = false
+        })
+
         return prev
       })
-
-
     }).catch((err) => {
       console.log(err)
+      setLoaded((prev) => {
+        return prev = false
+      })
+
       setError((prev) => {
         return prev = true
       })
+
     })
 
   }
 
   function textValue(event: ChangeEvent<HTMLInputElement>) {
-    console.log(event.target.value)
     setCityName((prev) => {
       prev = event.target.value
       return prev
     })
   }
 
-  function nameProcessor(cityName = "los angeles") {
+  function nameProcessor(cityName: string) {
     const result: string[] = []
     for (let i = 0; i < cityName.length; i++) {
       const curr = cityName[i]
