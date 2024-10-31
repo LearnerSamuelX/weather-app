@@ -9,8 +9,8 @@ export const SWITCH_TOGGLE_DAY = "w-20 border-2 border-gray-600 mt-5 md:mr-20 te
 export const SWITCH_TOGGLE_NIGHT = "w-20 border-2 border-white mt-5 md:mr-20 text-center bg-white border-white text-black text-xl cursor-pointer rounded-lg"
 
 // Application Title
-export const APPLICATION_TITLE_DAY = "text-center mb-5 mt-40 text-black text-2xl font-bold"
-export const APPLICATION_TITLE_NIGHT = "text-center mb-5 mt-40 text-white text-2xl font-bold"
+export const APPLICATION_TITLE_DAY = "text-center mb-20 mt-20 text-black text-4xl font-bold"
+export const APPLICATION_TITLE_NIGHT = "text-center mb-20 mt-20 text-white text-4xl font-bold"
 
 // Input Box
 export const INPUT_BOX_BORDER_DAY = "w-80 border-4 bg-white border-black text-black text-center rounded-lg text-xl p-2"
