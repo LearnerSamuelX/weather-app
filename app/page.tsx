@@ -124,7 +124,7 @@ export default function Home() {
       <main className={theme ? BACKGROUND_COLOR_DAY : BACKGROUND_COLOR_NIGHT}>
         <div className="flex justify-center md:justify-end ">
           <div className={theme ? SWITCH_TOGGLE_DAY : SWITCH_TOGGLE_NIGHT} onClick={themeChanger}>
-            {theme ? <p className="text-black">night</p> : <p className="text-white">day</p>}
+            {theme ? <p>night</p> : <p>day</p>}
           </div>
         </div>
 

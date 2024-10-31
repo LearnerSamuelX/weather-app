@@ -1,11 +1,12 @@
 
 // Background
-export const BACKGROUND_COLOR_DAY = "bg-blue-100 h-screen"
-export const BACKGROUND_COLOR_NIGHT = "bg-gray-700 h-screen"
+export const BACKGROUND_COLOR_DAY = "bg-blue-100 min-h-screen"
+export const BACKGROUND_COLOR_NIGHT = "bg-gray-700 min-h-screen"
 
 // Switch Toggle
-export const SWITCH_TOGGLE_DAY = "w-36 border-8 border-gray-600 mt-5 md:mr-20 text-center text-black cursor-pointer"
-export const SWITCH_TOGGLE_NIGHT = "w-36 border-8 border-white mt-5 md:mr-20 text-center text-white cursor-pointer"
+
+export const SWITCH_TOGGLE_DAY = "w-20 border-2 border-gray-600 mt-5 md:mr-20 text-center bg-gray-700 border-gray-700 text-white text-xl cursor-pointer rounded-lg"
+export const SWITCH_TOGGLE_NIGHT = "w-20 border-2 border-white mt-5 md:mr-20 text-center bg-white border-white text-black text-xl cursor-pointer rounded-lg"
 
 // Application Title
 export const APPLICATION_TITLE_DAY = "text-center mb-5 mt-40 text-black text-2xl font-bold"
