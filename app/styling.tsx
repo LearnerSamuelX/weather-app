@@ -1,15 +1,24 @@
-export const BORDER_LINE = "border-4 rounded-lg"
 
-export const INPUT_BORDER_LINE_BLACK = "w-full bg-white mb-10 text-lg text-center border-black p-2 " + BORDER_LINE
-export const INPUT_BORDER_LINE_WHITE = "w-full bg-white mb-10 text-lg text-center border-white p-2 " + BORDER_LINE
+// Background
+export const BACKGROUND_COLOR_DAY = "bg-blue-100 h-screen"
+export const BACKGROUND_COLOR_NIGHT = "bg-gray-700 h-screen"
 
-export const BUTTON_BORDER_LINE_BLACK = "w-1/4 mx-auto text-center p-1 font-bold border-black " + BORDER_LINE
-export const BUTTON_BORDER_LINE_WHITE = "w-1/4 mx-auto text-center p-1 font-bold border-white " + BORDER_LINE
+// Switch Toggle
+export const SWITCH_TOGGLE_DAY = "w-36 border-8 border-gray-600 mt-5 md:mr-20 text-center text-black cursor-pointer"
+export const SWITCH_TOGGLE_NIGHT = "w-36 border-8 border-white mt-5 md:mr-20 text-center text-white cursor-pointer"
 
 // Application Title
+export const APPLICATION_TITLE_DAY = "text-center mb-5 mt-40 text-black text-2xl font-bold"
+export const APPLICATION_TITLE_NIGHT = "text-center mb-5 mt-40 text-white text-2xl font-bold"
 
+// Input Box
+export const INPUT_BOX_BORDER_DAY = "w-80 border-8 bg-white border-black text-black text-center rounded-lg text-xl p-2"
+export const INPUT_BOX_BORDER_NIGHT = "w-80 border-8 bg-gray-500 border-gray-400 text-white text-center rounded-lg text-xl p-2"
 
 // Weather Information
+export const WEATHER_CARD_BG_DAY = "mt-20 border-blue-200 bg-blue-200 rounded-lg text-black text-center w-40 mx-auto p-5"
+export const WEATHER_CARD_BG_NIGHT = "mt-20 border-blue-200 bg-gray-400 rounded-lg text-white text-center w-40 mx-auto p-5"
+
 const SPACE_GAP = "mb-4 mt-4 "
 const DAY_FONT_COLOR = "text-black "
 export const WEATHER_INFO_FONT = SPACE_GAP + DAY_FONT_COLOR + "text-xl"

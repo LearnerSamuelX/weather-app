@@ -1,5 +1,6 @@
-type WeatherData = {
+type WeatherCardData = {
     cityName: string,
     temperature: number,
-    weather: string
+    weather: string,
+    theme: boolean
 }

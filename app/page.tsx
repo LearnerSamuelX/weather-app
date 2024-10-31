@@ -5,6 +5,16 @@ import Head from 'next/head';
 import Image from "next/image";
 import React, { useState, useEffect, ChangeEvent } from 'react';
 import axios from 'axios';
+import {
+  APPLICATION_TITLE_DAY,
+  APPLICATION_TITLE_NIGHT,
+  BACKGROUND_COLOR_DAY,
+  BACKGROUND_COLOR_NIGHT,
+  INPUT_BOX_BORDER_DAY,
+  INPUT_BOX_BORDER_NIGHT,
+  SWITCH_TOGGLE_DAY,
+  SWITCH_TOGGLE_NIGHT
+} from './styling';
 
 export default function Home() {
 
@@ -12,11 +22,15 @@ export default function Home() {
   const [renew, setRenew] = useState<string>("")
   const [error, setError] = useState<boolean>(false)
   const [loaded, setLoaded] = useState<boolean>(false)
-  const [weatherInfo, setWeatherInfo] = useState<WeatherData>({
+  const [weatherInfo, setWeatherInfo] = useState<WeatherCardData>({
     cityName: "N/A",
     temperature: -100,
-    weather: "N/A"
+    weather: "N/A",
+    theme: true
   })
+
+  // states for theme changing
+  const [theme, setTheme] = useState<boolean>(true) // true -> day; false -> night
 
   useEffect(() => {
   }, [renew])
@@ -67,7 +81,6 @@ export default function Home() {
       })
 
     })
-
   }
 
   function textValue(event: ChangeEvent<HTMLInputElement>) {
@@ -90,17 +103,31 @@ export default function Home() {
     return result.join("")
   }
 
+  function themeChanger() {
+    if (theme) {
+      // change it to night theme
+      setTheme((prev) => {
+        return prev = false
+      })
+    } else {
+      // change it to day theme
+      setTheme((prev) => {
+        return prev = true
+      })
+    }
+  }
+
   return (
     <div className="">
-      <main className="bg-blue-100 h-screen">
+      <main className={theme ? BACKGROUND_COLOR_DAY : BACKGROUND_COLOR_NIGHT}>
         <div className="flex justify-center md:justify-end ">
-          <div className="w-36 border-8 border-gray-600 mt-5 md:mr-20 text-center">
-            <p>Switch Toggle</p>
+          <div className={theme ? SWITCH_TOGGLE_DAY : SWITCH_TOGGLE_NIGHT} onClick={themeChanger}>
+            {theme ? <p className="text-black">night</p> : <p className="text-white">day</p>}
           </div>
         </div>
 
         {/* Application Name */}
-        <div className="text-center mb-5 mt-40 text-2xl font-bold">
+        <div className={theme ? APPLICATION_TITLE_DAY : APPLICATION_TITLE_NIGHT}>
           <h1>The Weather App</h1>
         </div>
 
@@ -108,7 +135,7 @@ export default function Home() {
         <div className="w-80 ml-auto mr-auto flex items-center">
           <input
             placeholder="Name of the city"
-            className="w-80 border-8 border-black text-center rounded-lg text-xl p-2"
+            className={theme ? INPUT_BOX_BORDER_DAY : INPUT_BOX_BORDER_NIGHT}
             onChange={textValue}
           ></input>
           <div className="ml-2" onClick={weatherUpdate}>
@@ -136,6 +163,7 @@ export default function Home() {
                 cityName={weatherInfo.cityName}
                 temperature={weatherInfo.temperature}
                 weather={weatherInfo.weather} // pass icon code in it
+                theme={theme}
               />
             </div> : <></>
           }
