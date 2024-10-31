@@ -12,6 +12,8 @@ import {
   BACKGROUND_COLOR_NIGHT,
   INPUT_BOX_BORDER_DAY,
   INPUT_BOX_BORDER_NIGHT,
+  SEARCH_BUTTON_BG_DAY,
+  SEARCH_BUTTON_BG_NIGHT,
   SWITCH_TOGGLE_DAY,
   SWITCH_TOGGLE_NIGHT
 } from './styling';
@@ -138,14 +140,8 @@ export default function Home() {
             className={theme ? INPUT_BOX_BORDER_DAY : INPUT_BOX_BORDER_NIGHT}
             onChange={textValue}
           ></input>
-          <div className="ml-2" onClick={weatherUpdate}>
-            <Image
-              className="cursor-pointer"
-              src="/search.png"
-              alt="search icon logomark"
-              width={40}
-              height={40}
-            />
+          <div className={theme ? SEARCH_BUTTON_BG_DAY : SEARCH_BUTTON_BG_NIGHT} onClick={weatherUpdate}>
+            <p>Search</p>
           </div>
         </div>
 
@@ -153,8 +149,8 @@ export default function Home() {
         <div>
           {
             error ?
-              <div className='text-center text-xl mt-5 text-red-500'>
-                <p>Error: Invalid city name! </p>
+              <div className='text-center text-xl mt-5 text-red-500 font-bold'>
+                <p>Invalid city name, try again</p>
               </div> : <></>
           }
           {
